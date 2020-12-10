@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light mb-3 sticky-top">
+    <a class="navbar-brand" [routerLink]="'.'"><img src="../../../assets/image/plat.png" height="60" width="80"></a>
+
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+        &#9776;
+    </button>
+
+    <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto" *ngIf="isAuthenticated$ | async as isAuthenticated">
+            <li class="nav-item active">
+                <a class="nav-link" [routerLink]="'.'">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="isAuthenticated.status" [routerLink]="['/create']">Ajouter une recette</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="isAuthenticated.status" (click)="signOut()">Déconnexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="!isAuthenticated.status" [routerLink]="['/login']">Connexion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" *ngIf="!isAuthenticated.status" [routerLink]="['/inscription']">Inscription</a>
+            </li>
+        </ul>
+    </div>
+</nav>

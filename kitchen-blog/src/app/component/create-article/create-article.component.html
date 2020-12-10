@@ -1,0 +1,156 @@
+<div class="container container-border">
+    <div class="card-grey"> <label for="addIngredient">Créer une recette</label></div>
+
+    <div *ngIf="isLoading" class="progress">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <form [formGroup]="form" *ngIf="!isLoading">
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="type">Type</label>
+                </div>
+                <select class="custom-select" id="type" formControlName="type">
+                    <option selected>Choose...</option>
+                    <option value="plat">Plat</option>
+                    <option value="dessert">Dessert</option>
+                    <option value="entree">Entrée</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="titre">Titre</label>
+                </div>
+                <input class="form-control" id="titre" aria-describedby="titreHelp" placeholder="Titre"
+                    formControlName="titre">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="cockingTime">Temps de cuisson</label>
+                </div>
+                <input class="form-control" type="number" id="cockingTime" aria-describedby="titreHelp"
+                    placeholder="Cocking Time" formControlName="cockingTime">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="preparationTime">Temps de preparation </label>
+                </div>
+                <input class="form-control" type="number" id="preparationTime" aria-describedby="titreHelp"
+                    placeholder="Cocking Time" formControlName="preparationTime">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="difficulty">Difficulty</label>
+                </div>
+                <select class="custom-select" id="difficulty" formControlName="difficulty">
+                    <option selected>Choose...</option>
+                    <option value="tresFacile">Très facile</option>
+                    <option value="facile">Facile</option>
+                    <option value="moyen">Moyen</option>
+                    <option value="Expere">Expere</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" for="Description">Description</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea" id="Description"
+                formControlName="description"></textarea>
+        </div>
+
+        <div class="container delete-padding">
+            <div class="card-grey"> <label for="addIngredient">Ajouter ingrédient</label></div>
+
+            <div class="row  justify-content-center ">
+                <div class="col-11 delete-rigth-padding">
+                    <input id="addIngredient" class="form-control" #newIngredient
+                        (keyup.enter)="addIngredient(newIngredient.value)"
+                        (blur)="addIngredient(newIngredient.value);newIngredient.value=''">
+                </div>
+                <div class="col-1 d-flex delete-padding">
+                    <fa-icon [styles]="{'stroke': 'red', 'color': 'blue'}" class="btn"
+                        (click)="addIngredient(newIngredient.value)" [icon]="faPlusCircle" size="lg"> </fa-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <ul class="list-group ">
+                <div class="list-group-item delete-verticale-padding"
+                    *ngFor="let ingredient of ingredients; let index = index">
+                    <div class="row">
+                        <div class="col-11 delete-verticale-padding margin-center">
+                            <span class="number-background">{{index +1}}</span> {{ingredient}}
+                        </div>
+                        <div class="col-1 delete-verticale-padding">
+                            <fa-icon [styles]="{'stroke': 'red', 'color': 'red'}" class="btn"
+                                (click)="deleteIngredient(index)" [icon]="faMinusCircle" size="lg"> </fa-icon>
+
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <div class="container delete-padding">
+            <div class="card-grey"> <label for="addEtape">Ajouter une étape</label></div>
+
+            <div class="row">
+                <div class="col-11 delete-rigth-padding">
+                    <input id="addEtape" class="form-control" #newEtape (keyup.enter)="addEtape(newEtape.value)"
+                        (blur)=" addEtape(newEtape.value); newEtape.value=''">
+                </div>
+                <div class="col-1 delete-padding">
+                    <fa-icon [styles]="{'stroke': 'red', 'color': 'blue'}" class="btn" (click)="deleteEtape(index)"
+                        [icon]="faPlusCircle" size="lg"> </fa-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <ul class="list-group ">
+                <div class="list-group-item delete-verticale-padding" *ngFor="let etape of etapes; let index = index">
+                    <div class="row">
+                        <div class="col-11 delete-verticale-padding  margin-center">
+                            <span class="number-background">{{index +1}}</span> {{etape}}
+                        </div>
+                        <div class="col-1 delete-verticale-padding">
+                            <fa-icon [styles]="{'stroke': 'red', 'color': 'red'}" class="btn"
+                                (click)="deleteEtape(index)" [icon]="faMinusCircle" size="lg"> </fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <div>
+            <label class="btn btn-default">
+                <input type="file" accept="image/*" multiple="true" (change)="selectFile($event)">
+            </label>
+        </div>
+
+        <div class="text-center">
+            <button class="btn btn-success text-center" type="submit" [disabled]="!selectedFiles"
+                (click)="upload()">Ajouter la
+                recette</button>
+        </div>
+    </form>
+</div>

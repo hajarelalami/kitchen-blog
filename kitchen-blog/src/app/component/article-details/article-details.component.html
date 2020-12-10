@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="card" *ngIf="article$ | async as article">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-2 ">
+                    <a [routerLink]="" (click)="toUserProfile(article.userId)"> {{article.username}} </a>
+                </div>
+                <div class="col-8 center">{{article.title}}</div>
+            </div>
+        </div>
+
+        <ngb-carousel *ngIf="(files$ | async)?.length > 0 && (files$ | async) as files; else defaultTemplate">
+            <ng-template ngbSlide *ngFor="let file of files" class="article-image">
+                <div class="picsum-img-wrapper ">
+                    <img  [src]="transform(file)" class="carousel-img">
+                </div>
+            </ng-template>
+        </ngb-carousel>
+
+        <div class="card-body">
+
+            <div class="card-grey">
+                <fa-icon [icon]="faClock"></fa-icon> {{article.preparationTime + article.cockingTime}} min
+                <fa-icon [icon]="faUtensils"> </fa-icon>{{article.difficulty}}
+            </div>
+
+            <p class="card-text">{{article.desc}}</p>
+
+            <div class="card-grey">
+                Ingrédients
+            </div>
+
+            <div class="contaier">
+                <div class="row  justify-content-center"
+                    *ngFor="let ingredient of article.ingredients ; let index = index">
+                    <div class="col-2 col-size center">
+                        <span class="number-background">{{index +1}}</span>
+                    </div>
+                    <div class="col-10 col-size">
+                        {{ingredient}}
+                    </div>
+                    <div class="seperator"></div>
+                </div>
+            </div>
+
+            <div class="card-grey">
+                Préparation
+            </div>
+
+            <div class="container">
+                <div class="row  justify-content-center center">
+                    <div class="col-4 col-size">
+                        <fa-icon size="lg" [icon]="faClock"></fa-icon>
+                        Cuisson
+                    </div>
+                    <div class="col-4 col-size">
+                        <fa-icon size="lg" [icon]="faClock"></fa-icon>
+                        Préparation
+                    </div>
+                </div>
+                <div class="row justify-content-center center">
+                    <div class="col-4 col-size"> {{article.cockingTime}}min</div>
+                    <div class="col-4 col-size"> {{article.preparationTime}}min</div>
+                </div>
+
+            </div>
+
+            <div class="contaier marge-top">
+                <div class="row  justify-content-center" *ngFor="let etape of article.etapes ; let index = index">
+                    <div class="col-2 col-size center">
+                        <span class="number-background">{{index +1}}</span>
+                    </div>
+                    <div class="col-10 col-size">
+                        {{etape}}
+                    </div>
+                    <div class="seperator"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #defaultTemplate>
+        <div class="picsum-img-wrapper">
+            <img src="../../../assets/image/not-found.png" class="carousel-img" alt="Random first slide">
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,42 @@
+.center {
+    align-items: center;
+    text-align: center !important;
+}
+.margin-center {
+    margin-top: 0.5rem;
+}
+
+.delete-padding {
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+}
+
+.delete-verticale-padding {
+    padding-top: 0rem !important;
+    padding-bottom: 0rem !important;
+}
+.delete-rigth-padding {
+    padding-right: 0rem !important;
+}
+
+.container-border {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.125);
+    border-radius: 20px;
+}
+
+.number-background {
+    width: 40px;
+    height: 40px;
+    padding: 0.2rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    text-align: center !important;
+    border-radius: 20px;
+}
+.list-margin {
+    margin: 0rem 1rem;
+}

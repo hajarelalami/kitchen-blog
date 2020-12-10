@@ -1,0 +1,24 @@
+<div class="container container-border">
+    <div class="card-grey"> <label for="addIngredient">Login</label></div>
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input class="form-control" id="username" aria-describedby="usernameHelp" placeholder="username"
+                formControlName="username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
+                formControlName="password">
+        </div>
+        <div class="text-center ">
+            <button type="button" class="btn btn-primary mx-2 my-2" (click)="login()">login</button>
+            <button type="button" class="btn btn-success mx-2 my-2"
+                (click)="navigateToInscriptionPage()">Inscription</button>
+        </div>
+
+
+        <div *ngIf="showErrorMessage" class="alert alert-danger" role="alert">
+            Error </div>
+    </form>
+</div>
